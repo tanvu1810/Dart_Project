@@ -10,7 +10,7 @@ class AnswerButton extends StatelessWidget {
     return SizedBox(
       height: 60,
       child: Container(
-        margin: EdgeInsets.symmetric(vertical: 4),
+        margin: const EdgeInsets.symmetric(vertical: 4),
         child: ElevatedButton(
           onPressed: onTap,
           child: Container(
