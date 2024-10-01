@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_game/data/question.dart';
 import 'package:quiz_game/question_screen.dart';
-import 'package:quiz_game/results_screen.dart';
 import 'package:quiz_game/start_screen.dart';
 
 class Quiz extends StatefulWidget {
@@ -13,59 +12,48 @@ class Quiz extends StatefulWidget {
 }
 
 class _QuizState extends State<Quiz> {
-  List<String> selectedAnswers = [];
+  List<String> selectedAnswer = [];
   var activeScreen = 'start-screen';
   void switchScreen() {
-    setState(() {
-      activeScreen = 'question-screen';
-    });
+    setState(
+      () {
+        activeScreen = 'question-screen';
+      },
+    );
   }
 
-  void chosenAnswer(String answer) {
-    selectedAnswers.add(answer);
-    if (selectedAnswers.length == questions.length) {
+  void chosenAnswers(String answer) {
+    selectedAnswer.add(answer);
+    if (selectedAnswer.length == questions.length) {
       setState(() {
-        activeScreen = 'results-screen';
+        selectedAnswer = [];
+        activeScreen = 'start-screen';
       });
     }
   }
 
-  void restartQuiz() {
-    selectedAnswers = [];
-    setState(() {
-      activeScreen = 'question-screen';
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    Widget widgetScreen = StartScreen(switchScreen);
+    Widget screenWidget = StartScreen(switchScreen);
     if (activeScreen == 'question-screen') {
-      widgetScreen = QuestionScreen(
-        onChoosen: chosenAnswer,
+      screenWidget = QuestionScreen(
+        onSelectedAnswer: chosenAnswers,
       );
     }
-    if (activeScreen == 'results-screen') {
-      widgetScreen = ResultsScreen(
-        onRestart: restartQuiz,
-        chosenAnswers: selectedAnswers,
-      );
+    if (activeScreen == 'start-screen') {
+      screenWidget = StartScreen(switchScreen);
     }
     return MaterialApp(
       home: Scaffold(
         body: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                Colors.deepPurple,
-                Colors.deepPurpleAccent,
-              ],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                colors: [Colors.grey, Colors.deepPurple],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
             ),
-          ),
-          child: widgetScreen,
-        ),
+            child: screenWidget),
       ),
     );
   }

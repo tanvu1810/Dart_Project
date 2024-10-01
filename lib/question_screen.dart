@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:quiz_game/answer_button.dart';
 import 'package:quiz_game/data/question.dart';
 
 class QuestionScreen extends StatefulWidget {
-  const QuestionScreen({super.key, required this.onChoosen});
-  final void Function(String answer) onChoosen;
+  const QuestionScreen({super.key, required this.onSelectedAnswer});
+  final void Function(String answer) onSelectedAnswer;
   @override
   State<QuestionScreen> createState() {
     return _QuestionScreenState();
@@ -15,7 +14,7 @@ class QuestionScreen extends StatefulWidget {
 class _QuestionScreenState extends State<QuestionScreen> {
   int currentQuestionIndex = 0;
   void answerQuestion(String answer) {
-    widget.onChoosen(answer);
+    widget.onSelectedAnswer(answer);
     setState(() {
       currentQuestionIndex++;
     });
@@ -24,26 +23,27 @@ class _QuestionScreenState extends State<QuestionScreen> {
   @override
   Widget build(BuildContext context) {
     final currentQuestion = questions[currentQuestionIndex];
-
     return SizedBox(
       width: double.infinity,
       child: Container(
-        margin: const EdgeInsets.all(30),
+        margin: const EdgeInsets.all(
+          40,
+        ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text(
               currentQuestion.text,
-              style: GoogleFonts.aBeeZee(
+              style: const TextStyle(
                 color: Colors.white,
-                fontSize: 20,
-                fontWeight: FontWeight.normal,
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
               ),
-              textAlign: TextAlign.start,
+              textAlign: TextAlign.center,
             ),
-            const SizedBox(height: 30),
-            ...currentQuestion.getShuffledAnswer().map(
+            const SizedBox(height: 40),
+            ...currentQuestion.answers.map(
               (answer) {
                 return AnswerButton(
                   answerText: answer,

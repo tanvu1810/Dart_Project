@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class StartScreen extends StatelessWidget {
-  const StartScreen(this.quizStart, {super.key});
-  final void Function() quizStart;
+  const StartScreen(this.onStart, {super.key});
+  final void Function() onStart;
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -15,37 +15,37 @@ class StartScreen extends StatelessWidget {
             width: 300,
             color: Colors.white,
           ),
-          const SizedBox(height: 30),
+          const SizedBox(height: 40),
           Text(
             'Learn Flutter The Fun Way !',
             style: GoogleFonts.aBeeZee(
               color: Colors.white,
-              fontSize: 24,
               fontWeight: FontWeight.bold,
+              fontSize: 24,
             ),
           ),
-          const SizedBox(height: 30),
+          const SizedBox(height: 40),
           TextButton.icon(
-            onPressed: quizStart,
-            icon: const Icon(Icons.arrow_right_alt),
+            onPressed: onStart,
             style: TextButton.styleFrom(
-              backgroundColor: Colors.deepPurple.shade600,
+              backgroundColor: Colors.redAccent,
               foregroundColor: Colors.white,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(
                   40,
                 ),
                 side: const BorderSide(
-                  width: 2,
-                  color: Colors.purpleAccent,
+                  color: Colors.red,
+                  width: 1,
                 ),
               ),
-              padding: const EdgeInsets.symmetric(
-                vertical: 10,
-                horizontal: 20,
-              ),
             ),
-            label: const Text('Start Quiz'),
+            icon: const Icon(
+              Icons.arrow_right_alt,
+            ),
+            label: const Text(
+              'Start Quiz',
+            ),
           )
         ],
       ),
