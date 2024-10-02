@@ -4,6 +4,7 @@ import 'package:quiz_game/data/question.dart';
 
 class QuestionScreen extends StatefulWidget {
   const QuestionScreen({super.key, required this.onSelectedAnswer});
+  // Hàm ẩn danh truyền vào câu trả lời khi nhấn button
   final void Function(String answer) onSelectedAnswer;
   @override
   State<QuestionScreen> createState() {
@@ -12,7 +13,9 @@ class QuestionScreen extends StatefulWidget {
 }
 
 class _QuestionScreenState extends State<QuestionScreen> {
+  // Biến lưu trữ chỉ số câu hỏi hiện tại
   int currentQuestionIndex = 0;
+  // Hàm tăng chỉ số câu hỏi khi nhấn nút
   void answerQuestion(String answer) {
     widget.onSelectedAnswer(answer);
     setState(() {
@@ -22,6 +25,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // Biến gán giá trị đối tượng questions
     final currentQuestion = questions[currentQuestionIndex];
     return SizedBox(
       width: double.infinity,
@@ -43,12 +47,13 @@ class _QuestionScreenState extends State<QuestionScreen> {
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 40),
-            ...currentQuestion.answers.map(
+            // Trả về số câu trả lời có trong map
+            ...currentQuestion.getShuffledAnswers().map(
               (answer) {
                 return AnswerButton(
                   answerText: answer,
                   onTap: () {
-                    answerQuestion(answer);
+                    answerQuestion(answer); // Khi bấm nút thì thực thi luôn
                   },
                 );
               },
