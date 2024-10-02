@@ -1,5 +1,6 @@
 import 'package:quiz_game/models/quiz_question.dart';
 
+// Tạo một danh sách chứa đối tượng QuizQuestion
 const questions = [
   QuizQuestion(
     'What are the main building blocks of Flutter UIs?',

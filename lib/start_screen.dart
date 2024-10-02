@@ -28,15 +28,11 @@ class StartScreen extends StatelessWidget {
           TextButton.icon(
             onPressed: onStart,
             style: TextButton.styleFrom(
-              backgroundColor: Colors.redAccent,
+              backgroundColor: Colors.purple.shade300,
               foregroundColor: Colors.white,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(
                   40,
-                ),
-                side: const BorderSide(
-                  color: Colors.red,
-                  width: 1,
                 ),
               ),
             ),
@@ -45,6 +41,7 @@ class StartScreen extends StatelessWidget {
             ),
             label: const Text(
               'Start Quiz',
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
             ),
           )
         ],
