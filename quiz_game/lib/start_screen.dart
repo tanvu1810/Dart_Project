@@ -12,8 +12,8 @@ class StartScreen extends StatelessWidget {
         children: [
           Image.asset(
             'assets/images/quiz-logo.png',
-            width: 300,
-            color: Colors.white,
+            width: 400,
+            color: Colors.deepPurple,
           ),
           const SizedBox(height: 40),
           Text(
