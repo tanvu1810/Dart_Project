@@ -53,4 +53,58 @@ const questions = [
       'By calling updateState()',
     ],
   ),
+  QuizQuestion(
+    'Những thành phần chính để xây dựng giao diện người dùng trong Flutter là gì?',
+    [
+      'Widgets',
+      'Components',
+      'Blocks',
+      'Functions',
+    ],
+  ),
+  QuizQuestion(
+    'Làm thế nào để xây dựng giao diện người dùng trong Flutter?',
+    [
+      'Bằng cách kết hợp các widget trong mã nguồn',
+      'Bằng cách sử dụng trình chỉnh sửa giao diện trực quan',
+      'Bằng cách định nghĩa các widget trong các tệp cấu hình',
+      'Bằng cách sử dụng XCode cho iOS và Android Studio cho Android',
+    ],
+  ),
+  QuizQuestion(
+    'Mục đích của StatefulWidget là gì?',
+    [
+      'Cập nhật giao diện người dùng khi dữ liệu thay đổi',
+      'Cập nhật dữ liệu khi giao diện người dùng thay đổi',
+      'Bỏ qua các thay đổi của dữ liệu',
+      'Render giao diện người dùng không phụ thuộc vào dữ liệu',
+    ],
+  ),
+  QuizQuestion(
+    'Bạn nên sử dụng loại widget nào thường xuyên hơn: StatelessWidget hay StatefulWidget?',
+    [
+      'StatelessWidget',
+      'StatefulWidget',
+      'Cả hai đều tốt như nhau',
+      'Không có lựa chọn nào đúng',
+    ],
+  ),
+  QuizQuestion(
+    'Điều gì xảy ra nếu bạn thay đổi dữ liệu trong một StatelessWidget?',
+    [
+      'Giao diện người dùng không được cập nhật',
+      'Giao diện người dùng được cập nhật',
+      'Widget Stateful gần nhất sẽ được cập nhật',
+      'Bất kỳ StatefulWidget lồng nhau nào cũng sẽ được cập nhật',
+    ],
+  ),
+  QuizQuestion(
+    'Bạn nên cập nhật dữ liệu bên trong StatefulWidgets như thế nào?',
+    [
+      'Bằng cách gọi phương thức setState()',
+      'Bằng cách gọi phương thức updateData()',
+      'Bằng cách gọi phương thức updateUI()',
+      'Bằng cách gọi phương thức updateState()',
+    ],
+  ),
 ];
