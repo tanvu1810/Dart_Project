@@ -36,16 +36,16 @@ class QuestionItem extends StatelessWidget {
                   data['correct-answer'] as String,
                   style: const TextStyle(
                     color: Colors.red,
-                    fontSize: 15,
-                    fontWeight: FontWeight.w500,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w400,
                   ),
                 ),
                 Text(
                   data['user-answer'] as String,
                   style: const TextStyle(
                     color: Colors.green,
-                    fontSize: 15,
-                    fontWeight: FontWeight.w500,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w400,
                   ),
                 ),
               ],
