@@ -43,9 +43,9 @@ class QuestionItem extends StatelessWidget {
                 Text(
                   data['user-answer'] as String,
                   style: const TextStyle(
-                    color: Colors.green,
+                    color: Colors.red,
                     fontSize: 16,
-                    fontWeight: FontWeight.w400,
+                    fontWeight: FontWeight.w500,
                   ),
                 ),
               ],
