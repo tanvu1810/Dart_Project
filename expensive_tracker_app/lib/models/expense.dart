@@ -1,38 +1,38 @@
-import 'package:flutter/material.dart'; // Cung cấp các widget và công cụ giao diện người dùng
-import 'package:uuid/uuid.dart'; // Tạo id duy nhất cho mỗi chi phí
-import 'package:intl/intl.dart'; // Định dạng ngày tháng
+// Them thu vien cho id va dateformat
+import 'package:flutter/material.dart';
+import 'package:uuid/uuid.dart';
+import 'package:intl/intl.dart';
 
-const uuid = Uuid(); // Khởi tạo đối tượng Uuid() từ thư viện uuid
+// Khoi tao doi tuong uuid
+const uuid = Uuid();
 
-// Tạo ra một danh sách hằng số cố định
-enum CateGory { travel, work, leisure, food }
+// Tao enum Category danh sach cac gia tri hang so khong doi
+enum Category { travel, work, leisure, food }
 
-// Tạo map categoryIcons (key: CateGory, value: icons)
-const categoryIcons = {
-  CateGory.food: Icons.food_bank_outlined,
-  CateGory.leisure: Icons.movie,
-  CateGory.travel: Icons.flight,
-  CateGory.work: Icons.work,
+// Tao map categoryIcons (key: enum, values: icon)
+final categoryIcons = {
+  Category.food: Icons.food_bank,
+  Category.leisure: Icons.movie,
+  Category.travel: Icons.flight,
+  Category.work: Icons.work,
 };
 
-// Tạo ra đối tượng DateFormat để định dạng ngày tháng
+// Khoi tao doi tuong dateformat
 final formatter = DateFormat.yMd();
 
+//Tao lop expense
 class Expense {
-  Expense(
-      {
-      // Các Tham số đặt tên
-      required this.title,
-      required this.amount,
-      required this.date,
-      required this.category})
-      : id = uuid.v4(); // Tạo ra một ID duy nhất cho mỗi đối tượng
+  Expense({
+    required this.title,
+    required this.amount,
+    required this.date,
+    required this.category,
+  }) : id = uuid.v4();
   final String id;
   final String title;
   final double amount;
   final DateTime date;
-  final CateGory category;
-
+  final Category category;
   String get formattedDate {
     return formatter.format(date);
   }

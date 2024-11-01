@@ -1,8 +1,10 @@
 import 'package:expensive_tracker_app/widgets/expenses.dart';
-import 'package:flutter/material.dart'; // Cung cấp các thành phần giao diện người dùng
+import 'package:flutter/material.dart';
 
 void main(List<String> args) {
-  runApp(const MaterialApp(
-    home: Expenses(),
-  ));
+  runApp(
+    const MaterialApp(
+      home: Expenses(),
+    ),
+  );
 }
