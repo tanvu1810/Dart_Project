@@ -1,39 +1,42 @@
-// Them thu vien cho id va dateformat
+// Cai dat thu vien tu sinh id va dinh dang ngay thang
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 import 'package:intl/intl.dart';
 
-// Khoi tao doi tuong uuid
+//Khoi tao doi tuong uuid
 const uuid = Uuid();
 
-// Tao enum Category danh sach cac gia tri hang so khong doi
-enum Category { travel, work, leisure, food }
+// Khai bao lop enum Category danh sach cac hang so khong doi
+enum Category { travel, food, leisure, work }
 
-// Tao map categoryIcons (key: enum, values: icon)
-final categoryIcons = {
+//Khoi tao doi tuong fomatter
+final fomatter = DateFormat.yMd();
+
+//Tao map categoryIcons
+const categoryIcons = {
   Category.food: Icons.food_bank,
   Category.leisure: Icons.movie,
   Category.travel: Icons.flight,
   Category.work: Icons.work,
 };
 
-// Khoi tao doi tuong dateformat
-final formatter = DateFormat.yMd();
-
-//Tao lop expense
+// Tao lop expense
 class Expense {
+  // Ham khoi tao co doi
   Expense({
-    required this.title,
     required this.amount,
     required this.date,
     required this.category,
+    required this.title,
   }) : id = uuid.v4();
+  // Khai bao cac thuoc tinh
   final String id;
   final String title;
   final double amount;
   final DateTime date;
   final Category category;
-  String get formattedDate {
-    return formatter.format(date);
+  // Ham getter tra ve gia tri ngay thang da duoc dinh dang
+  String get formatedDate {
+    return fomatter.format(date);
   }
 }

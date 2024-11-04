@@ -2,7 +2,10 @@ import 'package:expensive_tracker_app/models/expense.dart';
 import 'package:flutter/material.dart';
 
 class ExpensesItem extends StatelessWidget {
-  const ExpensesItem({super.key, required this.expense});
+  const ExpensesItem({
+    super.key,
+    required this.expense,
+  });
   final Expense expense;
   @override
   Widget build(BuildContext context) {
@@ -14,12 +17,14 @@ class ExpensesItem extends StatelessWidget {
         ),
         child: Column(
           children: [
-            Text(expense.title),
-            const SizedBox(height: 8),
+            Text(
+              expense.title,
+            ),
+            const SizedBox(height: 10),
             Row(
               children: [
                 Text(
-                  '\$ ${expense.amount.toStringAsFixed(2)}',
+                  '\$${expense.amount.toStringAsFixed(2)}',
                 ),
                 const Spacer(),
                 Row(
@@ -27,12 +32,14 @@ class ExpensesItem extends StatelessWidget {
                     Icon(
                       categoryIcons[expense.category],
                     ),
-                    const SizedBox(width: 10),
-                    Text(expense.formattedDate),
+                    const SizedBox(width: 16),
+                    Text(
+                      expense.formatedDate,
+                    ),
                   ],
                 ),
               ],
-            ),
+            )
           ],
         ),
       ),

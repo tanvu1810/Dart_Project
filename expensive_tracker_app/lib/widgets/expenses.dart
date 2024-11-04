@@ -12,33 +12,48 @@ class Expenses extends StatefulWidget {
 }
 
 class _ExpensesState extends State<Expenses> {
-  void _openAddExpenseOverlay() {
-    showModalBottomSheet(
-      context: context,
-      builder: (context) => const NewExpense(),
-    );
-  }
-
   final List<Expense> _registeredExpenses = [
     Expense(
-      title: 'Flutter Course',
       amount: 19.99,
       date: DateTime.now(),
       category: Category.work,
+      title: 'Flutter Course',
     ),
     Expense(
-      title: 'Cinema',
-      amount: 9.99,
+      amount: 16.99,
       date: DateTime.now(),
       category: Category.leisure,
+      title: 'Cinema',
     ),
   ];
+
+  void _openAddExpenseOverlay() {
+    showModalBottomSheet(
+      isScrollControlled: true,
+      context: context,
+      builder: (context) => NewExpense(
+        onAddExpense: _addExpense,
+      ),
+    );
+  }
+
+  void _addExpense(Expense expense) {
+    setState(() {
+      _registeredExpenses.add(expense);
+    });
+  }
+
+  void _removeExpense(Expense expense) {
+    setState(() {
+      _registeredExpenses.remove(expense);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Expenses Tracker App'),
+        title: const Text('Expenses Tracker'),
         actions: [
           IconButton(
             onPressed: _openAddExpenseOverlay,
@@ -50,12 +65,14 @@ class _ExpensesState extends State<Expenses> {
       ),
       body: Column(
         children: [
-          Text('Flow Chart'),
-          // Danh sach chi phi
-          Text('Expenses list'),
+          // Bieu do thong ke
+          const Text('Flow Chart'),
+          // Danh sach cac chi phi
+          const Text('Expenses List'),
           Expanded(
             child: ExpensesList(
               expenses: _registeredExpenses,
+              onRemoveExpense: _removeExpense,
             ),
           ),
         ],
