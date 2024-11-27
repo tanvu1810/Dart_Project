@@ -1,6 +1,8 @@
 import 'package:expensive_tracker_app/models/expense.dart';
 import 'package:flutter/material.dart';
 
+// Tien ich co trang thai vi no quan ly trang thai cua nguoi dung
+// O day la khoi tao va luu tru chi phi
 class NewExpense extends StatefulWidget {
   const NewExpense({super.key, required this.onAddExpense});
   final void Function(Expense expense) onAddExpense;
@@ -13,19 +15,11 @@ class NewExpense extends StatefulWidget {
 class _NewExpenseState extends State<NewExpense> {
   final _titleController = TextEditingController();
   final _amountController = TextEditingController();
-
-  Category _selectedCategory = Category.food;
   DateTime? _selectedDate;
-  @override
-  void dispose() {
-    _titleController.dispose();
-    _amountController.dispose();
-    super.dispose();
-  }
-
+  Category _selectedCategory = Category.food;
   void _presentDatePicker() async {
     final now = DateTime.now();
-    final firstDate = DateTime(now.year - 10, now.month, now.day);
+    final firstDate = DateTime(now.year - 1, now.month, now.day);
     final lastDate = DateTime(2030, 12, 31);
     final datePicked = await showDatePicker(
       context: context,
@@ -36,6 +30,13 @@ class _NewExpenseState extends State<NewExpense> {
     setState(() {
       _selectedDate = datePicked;
     });
+  }
+
+  @override
+  void dispose() {
+    _amountController.dispose();
+    _titleController.dispose();
+    super.dispose();
   }
 
   void _submitExpenseData() {
@@ -50,13 +51,13 @@ class _NewExpenseState extends State<NewExpense> {
         builder: (context) => AlertDialog(
           title: const Text('Invalid Input'),
           content:
-              const Text('Ban nhap khong dung dinh dang vui long nhap lai!'),
+              const Text('Ban nhap khong dung dinh dang vui long nhap lai !'),
           actions: [
             TextButton(
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: const Text('Okey'),
+              child: const Text('Oke'),
             ),
           ],
         ),
@@ -65,10 +66,10 @@ class _NewExpenseState extends State<NewExpense> {
     }
     widget.onAddExpense(
       Expense(
+          title: _titleController.text,
           amount: enteredAmount,
           date: _selectedDate!,
-          category: _selectedCategory,
-          title: _titleController.text),
+          category: _selectedCategory),
     );
     Navigator.pop(context);
   }
@@ -86,7 +87,7 @@ class _NewExpenseState extends State<NewExpense> {
               label: Text('Title'),
             ),
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: 12),
           Row(
             children: [
               Expanded(
@@ -100,28 +101,31 @@ class _NewExpenseState extends State<NewExpense> {
                 ),
               ),
               Expanded(
-                  child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text(
-                    _selectedDate == null
-                        ? 'No date select'
-                        : fomatter.format(_selectedDate!),
-                  ),
-                  IconButton(
-                    onPressed: _presentDatePicker,
-                    icon: const Icon(Icons.calendar_month),
-                  )
-                ],
-              ))
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      _selectedDate == null
+                          ? 'No date selected'
+                          : fomatter.format(_selectedDate!),
+                    ),
+                    const SizedBox(
+                      width: 12,
+                    ),
+                    IconButton(
+                      onPressed: _presentDatePicker,
+                      icon: const Icon(Icons.calendar_month),
+                    ),
+                  ],
+                ),
+              )
             ],
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: 26),
           Row(
             children: [
               DropdownButton(
-                icon: const Icon(Icons.arrow_drop_down_outlined),
                 value: _selectedCategory,
                 items: Category.values
                     .map(
@@ -133,19 +137,19 @@ class _NewExpenseState extends State<NewExpense> {
                       ),
                     )
                     .toList(),
-                onChanged: (value) => setState(
-                  () {
-                    if (value == null) {
-                      return;
-                    }
+                onChanged: (value) {
+                  if (value == null) {
+                    return;
+                  }
+                  setState(() {
                     _selectedCategory = value;
-                  },
-                ),
+                  });
+                },
               ),
               const Spacer(),
               ElevatedButton(
                 onPressed: _submitExpenseData,
-                child: const Text('Save Expenses'),
+                child: const Text('Expense Save'),
               ),
               TextButton(
                 onPressed: () {
@@ -154,7 +158,7 @@ class _NewExpenseState extends State<NewExpense> {
                 child: const Text('Cancel'),
               ),
             ],
-          ),
+          )
         ],
       ),
     );

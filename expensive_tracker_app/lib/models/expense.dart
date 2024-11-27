@@ -1,42 +1,55 @@
-// Cai dat thu vien tu sinh id va dinh dang ngay thang
+// Cai dat thu vien de moi chi phi co mot ID duy nhat
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
+// Cai dat thu vien de dinh dang ngay thang
 import 'package:intl/intl.dart';
 
-//Khoi tao doi tuong uuid
+// Khoi tao doi tuong uuid
 const uuid = Uuid();
-
-// Khai bao lop enum Category danh sach cac hang so khong doi
-enum Category { travel, food, leisure, work }
-
-//Khoi tao doi tuong fomatter
+// Khoi tao doi tuong fomatter
 final fomatter = DateFormat.yMd();
-
-//Tao map categoryIcons
-const categoryIcons = {
+// Khoi tao map categoryIcon (Key: enum : values: icons)
+final categoryIcons = {
   Category.food: Icons.food_bank,
   Category.leisure: Icons.movie,
   Category.travel: Icons.flight,
   Category.work: Icons.work,
 };
 
-// Tao lop expense
+// Khoi tao enum Category danh sach cac gia tri hang so khong doi
+enum Category { travel, leisure, work, food }
+
+// Cai dat lop expense
 class Expense {
-  // Ham khoi tao co doi
-  Expense({
-    required this.amount,
-    required this.date,
-    required this.category,
-    required this.title,
-  }) : id = uuid.v4();
-  // Khai bao cac thuoc tinh
+  Expense(
+      {required this.title,
+      required this.amount,
+      required this.date,
+      required this.category})
+      : id = uuid.v4();
   final String id;
   final String title;
-  final double amount;
   final DateTime date;
+  final double amount;
   final Category category;
-  // Ham getter tra ve gia tri ngay thang da duoc dinh dang
+
   String get formatedDate {
     return fomatter.format(date);
+  }
+}
+
+class ExpenseBucket {
+  const ExpenseBucket({
+    required this.category,
+    required this.expenses,
+  });
+  final Category category;
+  final List<Expense> expenses;
+  double get totalExpenses {
+    double sum = 0;
+    for (final expense in expenses) {
+      sum += expense.amount;
+    }
+    return sum;
   }
 }
