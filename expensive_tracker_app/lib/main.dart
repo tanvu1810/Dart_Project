@@ -1,5 +1,6 @@
 import 'package:expensive_tracker_app/widgets/expenses.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart'; // Thư viện giúp khóa hướng của màn hình
 
 var kColorScheme = ColorScheme.fromSeed(
   seedColor: const Color.fromARGB(255, 173, 146, 238),
@@ -9,6 +10,12 @@ var kDarkColorScheme = ColorScheme.fromSeed(
   seedColor: const Color.fromARGB(255, 5, 99, 125),
 );
 void main(List<String> args) {
+  // WidgetsFlutterBinding.ensureInitialized();
+  //SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then(
+  //   (fn) {
+
+  //   },
+  // );
   runApp(
     MaterialApp(
       darkTheme: ThemeData.dark().copyWith(

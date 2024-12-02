@@ -1,4 +1,5 @@
 import 'package:expensive_tracker_app/models/expense.dart';
+import 'package:expensive_tracker_app/widgets/chart/chart.dart';
 import 'package:expensive_tracker_app/widgets/expenses_list/expenses_list.dart';
 import 'package:expensive_tracker_app/widgets/new_expense.dart';
 import 'package:flutter/material.dart';
@@ -30,6 +31,7 @@ class _ExpensesState extends State<Expenses> {
   // Tao ham _openAddExpenseOverlay
   void _openAddExpenseOverlay() {
     showModalBottomSheet(
+      useSafeArea: true,
       isScrollControlled: true,
       context: context,
       builder: (context) => NewExpense(
@@ -72,6 +74,7 @@ class _ExpensesState extends State<Expenses> {
 
   @override
   Widget build(BuildContext context) {
+    final double maxWidth = MediaQuery.of(context).size.width;
     Widget mainContent = const Center(
       child: Text('Expenses not found. Start adding some !'),
     );
@@ -92,16 +95,27 @@ class _ExpensesState extends State<Expenses> {
           )
         ],
       ),
-      body: Column(
-        children: [
-          const Text('Flow Chart'),
-          // Danh sach cac chi phi
-          const Text('Expenses List'),
-          Expanded(
-            child: mainContent,
-          ),
-        ],
-      ),
+      body: maxWidth < 600
+          ? Column(
+              children: [
+                Chart(expenses: _registeredExpenses),
+                // Danh sach cac chi phi
+                Expanded(
+                  child: mainContent,
+                ),
+              ],
+            )
+          : Row(
+              children: [
+                Expanded(
+                  child: Chart(expenses: _registeredExpenses),
+                ),
+                // Danh sach cac chi phi
+                Expanded(
+                  child: mainContent,
+                ),
+              ],
+            ),
     );
   }
 }
